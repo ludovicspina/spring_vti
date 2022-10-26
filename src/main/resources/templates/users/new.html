@@ -14,20 +14,26 @@
     <hr>
     <h2>Save User</h2>
 
-    <form action="#" th:action="@{/save}" th:object="${user}"
+    <form action="#" th:action="@{/users/save}" th:object="${user}"
           method="POST">
         <input type="text" th:field="*{name}" placeholder="User Name"
                class="form-control mb-4 col-4"> <input type="text"
                                                        th:field="*{email}" placeholder="User Email"
                                                        class="form-control mb-4 col-4">
-
+        <select class="form-control" id="role" name="role">
+            <option value="">Select Role</option>
+            <option th:each="role : ${roles_list}"
+                    th:value="${role.id}"
+                    th:text="${role.id}+' : '+${role.label}"
+                    th:selected="${user.getRole()==role}"></option>
+        </select>
         <button type="submit" class="btn btn-info col-2">Save
             User</button>
     </form>
 
     <hr>
 
-    <a th:href="@{/}"> Back to User List</a>
+    <a th:href="@{/users/}"> Back to Users List</a>
 </div>
 </body>
 </html>

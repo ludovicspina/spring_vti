@@ -11,20 +11,26 @@
 <div class="container">
     <h1>User Management System</h1>
     <hr>
-    <h2>Update USer</h2>
+    <h2>Update User</h2>
 
-    <form action="#" th:action="@{/save}" th:object="${user}"
+    <form action="#" th:action="@{/users/save}" th:object="${user}"
           method="POST">
         <input type="hidden" th:field="*{id}" />
 
         <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
 
         <input type="text" th:field="*{email}" class="form-control mb-4 col-4">
-
-        <button type="submit" class="btn btn-info col-2"> Update Employee</button>
+        <select class="form-control" id="role" name="role">
+            <option value="">Select Role</option>
+            <option th:each="role : ${roles_list}"
+                    th:value="${role.id}"
+                    th:text="${role.id}+' : '+${role.label}"
+                    th:selected="${user.getRole()==role}"></option>
+        </select>
+        <button type="submit" class="btn btn-info col-2"> Update User</button>
     </form>
     <hr>
-    <a th:href = "@{/}"> Back to Employee List</a>
+    <a th:href = "@{/users/}"> Back to Users List</a>
 </div>
 </body>
 </html>
