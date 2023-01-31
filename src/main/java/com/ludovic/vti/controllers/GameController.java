@@ -26,7 +26,7 @@ public class GameController {
     public String showGames(Model model) {
         List<Game> games = gameRepository.findAll();
         model.addAttribute("games", games);
-        return "games";
+        return "index";
     }
 
     @PostMapping("/addGame")
