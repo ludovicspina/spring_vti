@@ -5,6 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-coucou
+
+
+<a href="addGame">Add Game</a>
+<p>List of games :</p>
+<table>
+    <tr>
+        <th>Titre</th>
+        <th>Plate-forme</th>
+        <th>Date de sortie</th>
+    </tr>
+    <tr th:each="game : ${games}">
+        <td th:text="${game.title}"></td>
+        <td th:text="${game.description}"></td>
+    </tr>
+</table>
+
 </body>
 </html>

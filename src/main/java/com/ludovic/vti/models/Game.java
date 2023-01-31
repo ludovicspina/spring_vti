@@ -12,7 +12,33 @@ public class Game {
 
     private String name;
 
-    @ManyToMany
-    private List<Post> post;
+    private String description;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Game setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Game setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Game setDescription(String description) {
+        this.description = description;
+        return this;
+    }
 
 }
