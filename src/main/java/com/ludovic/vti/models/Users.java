@@ -6,12 +6,12 @@ import java.util.Date;
 import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String name;
+    private String username;
 
     private String email;
 
@@ -34,11 +34,11 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 
     public String getEmail() {
@@ -53,7 +53,7 @@ public class User {
         return password;
     }
 
-    public User setPassword(String password) {
+    public Users setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -62,8 +62,13 @@ public class User {
         return registration_date;
     }
 
-    public User setRegistration_date(Date registration_date) {
+    public Users setRegistration_date(Date registration_date) {
         this.registration_date = registration_date;
         return this;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
 }

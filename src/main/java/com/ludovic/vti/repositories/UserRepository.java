@@ -1,8 +1,8 @@
 package com.ludovic.vti.repositories;
 
-import com.ludovic.vti.models.User;
-import org.springframework.data.repository.CrudRepository;
+import com.ludovic.vti.models.Users;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository<User> extends CrudRepository<com.ludovic.vti.models.User, Integer> {
-
+public interface UserRepository extends JpaRepository<Users, Long> {
+    Users findByUsername(String username);
 }

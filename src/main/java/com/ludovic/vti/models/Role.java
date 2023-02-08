@@ -12,7 +12,7 @@ public class Role {
     private String label;
 
     @OneToMany(mappedBy = "role")
-    private List<User> users;
+    private List<Users> users;
 
     public Integer getId() {
         return id;
@@ -31,4 +31,6 @@ public class Role {
         this.label = label;
         return this;
     }
+
+
 }

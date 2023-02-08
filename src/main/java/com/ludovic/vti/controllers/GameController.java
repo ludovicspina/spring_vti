@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -17,24 +17,24 @@ public class GameController {
     @Autowired
     private GameRepository gameRepository;
 
-    @GetMapping("/addGame")
+    @GetMapping("/games/add")
     public String showForm(Game game) {
-        return "addGame";
+        return "/games/add";
     }
 
-    @GetMapping("/")
+    @GetMapping("/games/list")
     public String showGames(Model model) {
         List<Game> games = gameRepository.findAll();
         model.addAttribute("games", games);
-        return "index";
+        return "/games/list";
     }
 
-    @PostMapping("/addGame")
+  /*  @PostMapping("/games/add")
     public String handleFormSubmit(@Valid Game game, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "addGame";
+            return "/games/add";
         }
         gameRepository.save(game);
-        return "confirmAddingGame";
-    }
+        return "/games/confirm";
+    }*/
 }
