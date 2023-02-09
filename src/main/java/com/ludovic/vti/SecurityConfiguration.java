@@ -30,13 +30,12 @@ public class SecurityConfiguration {
                 .antMatchers("/").permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/index.html", true)
+                .defaultSuccessUrl("/")
                 .failureUrl("/login-error")
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout=true")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
         return http.build();

@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AuthController {
+
     @GetMapping("/login")
     public String showLogin() {
-        return "/login";
+        return "login";
     }
 }
