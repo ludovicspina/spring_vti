@@ -1,71 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet"/>
+    <title>Login</title>
+    <meta charset="UTF-8"/>
+    <script th:replace="template :: tailwind"></script>
+    <link th:replace="template :: flowbite-1">
 </head>
 <body>
-
-
-<div class="form-container">
-    <h1>Connexion</h1>
-    <form action="login" method="post">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="username" required>
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" required>
-        <input type="submit" value="Se connecter">
+<div>
+    <form class="bg-white p-8 rounded-lg shadow-xl" th:action="@{/login}" method="post">
+        <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="username">Nom d'utilisateur :</label>
+            <input class="w-full border border-gray-400 p-2 rounded-lg" type="text" id="username" name="username" />
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="password">Mot de passe :</label>
+            <input class="w-full border border-gray-400 p-2 rounded-lg" type="password" id="password" name="password" />
+        </div>
+        <div class="text-center mt-4">
+            <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg">Connexion</button>
+        </div>
+        <div th:if="${param.error}" class="text-center mt-2 text-red-600">
+            <p>Nom d'utilisateur ou mot de passe incorrect.</p>
+        </div>
     </form>
+
 </div>
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-
+<script th:replace="template :: flowbite-2"></script>
 </body>
-<style>
-    .form-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 50px;
-    }
-
-    h1 {
-        margin-bottom: 30px;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: #f2f2f2;
-        padding: 50px;
-        border-radius: 10px;
-    }
-
-    input[type="text"], input[type="password"] {
-        width: 100%;
-        padding: 15px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-
-    input[type="submit"] {
-        width: 100%;
-        padding: 15px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    input[type="submit"]:hover {
-        background-color: #3e8e41;
-    }
-</style>
 </html>
