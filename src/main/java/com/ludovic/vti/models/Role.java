@@ -32,5 +32,12 @@ public class Role {
         return this;
     }
 
+    public List<Users> getUsers() {
+        return users;
+    }
 
+    public Role setUsers(List<Users> users) {
+        this.users = users;
+        return this;
+    }
 }

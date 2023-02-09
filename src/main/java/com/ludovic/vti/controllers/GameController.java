@@ -29,12 +29,4 @@ public class GameController {
         return "/games/list";
     }
 
-  /*  @PostMapping("/games/add")
-    public String handleFormSubmit(@Valid Game game, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/games/add";
-        }
-        gameRepository.save(game);
-        return "/games/confirm";
-    }*/
 }
