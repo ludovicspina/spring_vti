@@ -26,7 +26,7 @@ public class SecurityConfiguration {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/users/**").hasRole("admin")
-                .antMatchers("/games/**").hasRole("user")
+                .antMatchers("/games/**").hasAnyRole("admin", "user")
                 .antMatchers("/").permitAll()
                 .and()
                 .formLogin()
@@ -52,9 +52,6 @@ public class SecurityConfiguration {
         @Autowired
         private UserRepository userRepository;
 
-        @Autowired
-        private PasswordEncoder passwordEncoder;
-
         @Override
         public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
             com.ludovic.vti.models.Users user = userRepository.findByUsername(username);
@@ -63,7 +60,7 @@ public class SecurityConfiguration {
             }
 
             return new org.springframework.security.core.userdetails.User(user.getName(),
-                    passwordEncoder.encode(user.getPassword()),
+                    user.getPassword(),
                     getAuthority(user));
         }
 

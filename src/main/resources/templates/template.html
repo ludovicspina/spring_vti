@@ -13,8 +13,17 @@
                 <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white">
                     <li>
                         <span>Login</span>
+
                     </li>
                     <li class="w-10">
+                        <div th:if="${#authentication != null and #authentication.isAuthenticated()}">
+                            <p>Bienvenue, ${#authentication.getName()} !</p>
+                            <!-- Contenu de la page pour l'utilisateur connecté -->
+                        </div>
+                        <div th:if="${#authentication == null or !#authentication.isAuthenticated()}">
+                            <p>Vous devez vous connecter pour accéder à cette page.</p>
+                            <a th:href="@{/login}">Se connecter</a>
+                        </div>
                     </li>
 
                     <li>

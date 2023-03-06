@@ -2,13 +2,17 @@ package com.ludovic.vti.controllers;
 
 import com.ludovic.vti.models.Users;
 import com.ludovic.vti.repositories.UserRepository;
+import org.apache.catalina.User;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-
-//import javax.validation.Valid;
-import java.util.List;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
@@ -22,18 +26,19 @@ public class UserController {
 
     @GetMapping("/users/list")
     public String showUsers(Model model) {
-        List<Users> users = userRepository.findAll();
+        Iterable<Users> users = userRepository.findAll();
         model.addAttribute("users", users);
         return "/users/list";
     }
 
-    /*@PostMapping("/users/add")
-    public String handleFormSubmit(@Valid User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/users/add";
-        }
+    @PostMapping("/users/add")
+    public String saveUser(@ModelAttribute("user") Users user) {
+        user.setPassword(passwordEncoder().encode(user.getPassword()));
         userRepository.save(user);
-        return "/users/confirm";
-    }*/
+        return "redirect:/users/list";
+    }
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }
