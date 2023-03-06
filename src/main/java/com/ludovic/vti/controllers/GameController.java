@@ -1,12 +1,14 @@
 package com.ludovic.vti.controllers;
 
 import com.ludovic.vti.models.Game;
+import com.ludovic.vti.models.Users;
 import com.ludovic.vti.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 //import javax.validation.Valid;
@@ -27,6 +29,12 @@ public class GameController {
         List<Game> games = gameRepository.findAll();
         model.addAttribute("games", games);
         return "/games/list";
+    }
+
+    @PostMapping("/games/add")
+    public String saveGame(@ModelAttribute("game") Game game) {
+        gameRepository.save(game);
+        return "redirect:/games/list";
     }
 
 }
