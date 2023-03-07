@@ -28,6 +28,7 @@ public class SecurityConfiguration {
                 .antMatchers("/").permitAll()
                 .antMatchers("/users/**").hasRole("admin")
                 .antMatchers("/games/**").hasAnyRole("admin", "user")
+                .antMatchers("/posts/**").hasAnyRole("admin", "user")
                 .and()
                 .formLogin()
                 .loginPage("/login")

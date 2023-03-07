@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 //import javax.validation.Valid;
@@ -36,5 +37,21 @@ public class GameController {
         gameRepository.save(game);
         return "redirect:/games/list";
     }
+
+
+//     @PostMapping("/games/edit/{id}")
+//    public String updateGame(@ModelAttribute("game") Game game, @PathVariable("id") Integer id) {
+//        game.setId(id);
+//        gameRepository.save(game);
+//        return "redirect:/games/list";
+//    }
+//
+//    @GetMapping("/games/edit/{id}")
+//    public String showEditForm(@PathVariable("id") Integer id, Model model) {
+//        Game game = gameRepository.findById(Long.valueOf(id))
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid game Id:" + id));
+//        model.addAttribute("game", game);
+//        return "/games/edit";
+//    }
 
 }

@@ -16,20 +16,21 @@
         <thead class="text-xs text-neutral-800 uppercase bg-gray-50">
         <tr>
             <th scope="col" class="px-6 py-3">
-                Nom
+                Jeu
             </th>
             <th scope="col" class="px-6 py-3">
-                Description
+                Objet
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Prix
             </th>
         </tr>
         </thead>
         <tbody>
-        <tr class="bg-white border-b" th:each="game:${games}">
-            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" th:text="${game.name}"></td>
-            <td class="px-6 py-4" th:text="${game.description}"></td>
-            <td class="px-6 py-4">
-                <a th:href="@{/games/edit/{id}(id=${game.id})}" class="text-indigo-600 hover:text-indigo-900">Editer</a>
-            </td>
+        <tr class="bg-white border-b"  th:each="post:${posts}" >
+            <td class="px-6 py-4" th:text="${post.game.name}"></td>
+            <td class="px-6 py-4" th:text="${post.title}"></td>
+            <td class="px-6 py-4" th:text="${post.price} + ' ' + ${post.currency}"></td>
         </tr>
         </tbody>
     </table>
