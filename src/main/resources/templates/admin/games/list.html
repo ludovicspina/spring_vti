@@ -21,14 +21,22 @@
             <th scope="col" class="px-6 py-3">
                 Description
             </th>
+            <th scope="col" class="px-6 py-3">
+                Monnaie
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Actions
+            </th>
         </tr>
         </thead>
         <tbody>
         <tr class="bg-white border-b" th:each="game:${games}">
             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" th:text="${game.name}"></td>
             <td class="px-6 py-4" th:text="${game.description}"></td>
-            <td class="px-6 py-4">
-                <a th:href="@{/games/edit/{id}(id=${game.id})}" class="text-indigo-600 hover:text-indigo-900">Editer</a>
+            <td class="px-6 py-4" th:text="${game.monnaie}"></td>
+            <td class="px-6 py-4 flex gap-4">
+                <a th:href="@{/templates/admin/games/edit/{id}(id=${game.id})}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                <a th:href="@{/templates/admin/games/edit/{id}(id=${game.id})}" class="text-indigo-600 hover:text-indigo-900">Delete</a>
             </td>
         </tr>
         </tbody>

@@ -11,7 +11,7 @@
 
 <nav th:replace="template :: navbar"></nav>
 
-<div class="relative overflow-x-auto w-2/4 ml-8 mt-8">
+<div class="relative overflow-x-auto mx-8 mt-8">
     <table class="w-full text-sm text-left text-neutral-800">
         <thead class="text-xs text-neutral-800 uppercase bg-gray-50">
         <tr>
@@ -24,13 +24,22 @@
             <th scope="col" class="px-6 py-3">
                 Prix
             </th>
+            <th scope="col" class="px-6 py-3">
+                Utilisateur
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Actions
+            </th>
         </tr>
         </thead>
         <tbody>
-        <tr class="bg-white border-b"  th:each="post:${posts}" >
+        <tr class="bg-white border-b" th:each="post:${posts}" th:data-game-id="${post.game.id}"
+            th:data-price="${post.price}" th:data-name="${post.title}">
             <td class="px-6 py-4" th:text="${post.game.name}"></td>
             <td class="px-6 py-4" th:text="${post.title}"></td>
-            <td class="px-6 py-4" th:text="${post.price} + ' ' + ${post.currency}"></td>
+            <td class="px-6 py-4" th:text="${post.price} + ' ' + ${post.game.monnaie}"></td>
+            <td class="px-6 py-4" th:text="${post.user.username}"></td>
+            <td class="px-6 py-4 underline">Supprimer</td>
         </tr>
         </tbody>
     </table>

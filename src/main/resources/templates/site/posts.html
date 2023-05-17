@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <script th:replace="template :: tailwind"></script>
+    <link th:replace="template :: flowbite-1">
+    <title>VTI</title>
+    <link th:replace="template :: favicon">
+</head>
+<body>
+<nav th:replace="template :: navbar"></nav>
+
+<div class="flex justify-center bg-neutral-900 gap-10">
+    <a th:href="@{/posts/add}"
+       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:p-0"
+       aria-current="page">Ajouter un objet</a>
+</div>
+
+<div class="flex justify-center">
+    <div class="bg-neutral-700 pb-2 px-2">
+        <div class="flex justify-center underline text-white py-2">Filtres</div>
+        <div class="flex gap-16">
+            <div class="text-white">
+                <label for="filter">Trier par jeu</label>
+                <select id="filter" name="filter" class="text-black" onchange="filterPosts()">
+                    <option value="all">Tous</option>
+                    <option th:each="game : ${games}" th:value="${game.id}" th:text="${game.name}"></option>
+                </select></div>
+            <div class="text-white">
+                <label for="sort">Trier par prix</label>
+                <select id="sort" name="sort" class="text-black" onchange="sortPosts()">
+                    <option value="asc">Prix croissant</option>
+                    <option value="desc">Prix décroissant</option>
+                </select>
+            </div>
+            <div>
+                <label class="text-white" for="nameFilter">Filtrer par nom</label>
+                <input  class="h-6 w-32" type="text" id="nameFilter" name="nameFilter" oninput="filterByName()"/>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="relative overflow-x-auto mx-8 mt-8">
+    <table class="w-full text-sm text-left text-neutral-800">
+        <thead class="text-xs text-neutral-800 uppercase bg-gray-50">
+        <tr>
+            <th scope="col" class="px-6 py-3">
+                Jeu
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Objet
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Prix
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Utilisateur
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Actions
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="bg-white border-b" th:each="post:${posts}" th:data-game-id="${post.game.id}"
+            th:data-price="${post.price}" th:data-name="${post.title}">
+            <td class="px-6 py-4" th:text="${post.game.name}"></td>
+            <td class="px-6 py-4" th:text="${post.title}"></td>
+            <td class="px-6 py-4" th:text="${post.price} + ' ' + ${post.game.monnaie}"></td>
+            <td class="px-6 py-4" th:text="${post.user.username}"></td>
+            <td class="px-6 py-4 underline">J'achète !</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script th:replace="template :: flowbite-2"></script>
+</body>
+<script>
+    function filterPosts() {
+        var selectedGameId = document.getElementById("filter").value;
+        var rows = document.querySelectorAll("tbody tr");
+
+        for (var i = 0; i < rows.length; i++) {
+            var gameId = rows[i].getAttribute("data-game-id");
+
+            if (selectedGameId === "all" || gameId === selectedGameId) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+</script>
+<script>
+    function sortPosts() {
+        var sortBy = document.getElementById("sort").value;
+        var rows = document.querySelectorAll("tbody tr");
+
+        var sortedRows = Array.from(rows).sort(function (row1, row2) {
+            var price1 = parseFloat(row1.getAttribute("data-price"));
+            var price2 = parseFloat(row2.getAttribute("data-price"));
+
+            if (sortBy === "asc") {
+                return price1 - price2;
+            } else {
+                return price2 - price1;
+            }
+        });
+
+        var tableBody = document.querySelector("tbody");
+        tableBody.innerHTML = "";
+        sortedRows.forEach(function (row) {
+            tableBody.appendChild(row);
+        });
+    }
+</script>
+<script>
+    function filterByName() {
+        var filterValue = document.getElementById("nameFilter").value.toLowerCase();
+        var rows = document.querySelectorAll("tbody tr");
+
+        for (var i = 0; i < rows.length; i++) {
+            var name = rows[i].getAttribute("data-name").toLowerCase();
+
+            if (name.includes(filterValue)) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+
+</html>

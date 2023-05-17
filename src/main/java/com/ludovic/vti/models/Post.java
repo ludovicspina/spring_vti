@@ -1,7 +1,10 @@
 package com.ludovic.vti.models;
 
+import jdk.jfr.DataAmount;
+
 import javax.persistence.*;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +17,26 @@ public class Post {
     private String title;
     private String content;
     private Date date;
-    private String currency;
-    private int price;
+    private String price;
+
+    @ManyToOne
+    private Users user;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     @ManyToOne
     private Game game;
@@ -52,21 +73,6 @@ public class Post {
         this.date = date;
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
 
     public Game getGame() {
         return game;

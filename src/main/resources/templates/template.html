@@ -1,7 +1,7 @@
 <!-- navbar -->
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5" th:fragment="navbar">
+<nav class="border-gray-200 px-2 sm:px-4 py-2.5 bg-neutral-800 text-white" th:fragment="navbar">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
-        <a href="./" class="flex items-center">
+        <a th:href="@{/}" class="flex items-center">
             <img src="https://ludovicspina.fr/images/dev/VendTonItem.png" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo"/>
             <span class="self-center text-xl font-semibold whitespace-nowrap">VendTonItem</span>
         </a>
@@ -16,26 +16,58 @@
                       clip-rule="evenodd"></path>
             </svg>
         </button>
-        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white">
+
+        <div th:if="${getInit} == '0'">
+            <a th:href="@{/init}">INITIALISER</a>
+        </div>
+
+        <div class="fixed bottom-0 right-0 flex gap-5 bg-neutral-800 rounded-tl text-white p-4">
+            <div th:if="${getConnectedName != 'anonymousUser'}">
+                <span class="text-xs font-medium p-1 bg-blue-900 bg-opacity-50 text-blue-300 flex" th:text="${getConnectedRole.replace('[ROLE_', '').replace(']', '')}">
+                      </span>
+
+            </div>
+
+            <div class="flex gap-5">
                 <!-- J'avais la flemme de faire ça differemment -->
                 <div th:if="${getConnectedName != 'anonymousUser'}">
                     <p>Bienvenue, <span th:text="${getConnectedName}"></span></p>
                 </div>
                 <div th:if="${getConnectedName == 'anonymousUser'}">
-                    <a href="../login">Se connecter</a>
+                    <a th:href="@{/login}">Se connecter</a>
                 </div>
                 <!-- Fin de la flemme -->
+                <div th:if="${getConnectedName != 'anonymousUser'}">
+                    <a th:href="@{/logout}">Se déconnecter</a>
+                </div>
+            </div>
+        </div>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-user">
+            <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-neutral-700 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-neutral-700">
+                <li>
+                    <a th:href="@{/}"
+                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:p-0"
+                       aria-current="page">Accueil</a>
+                </li>
+                <li>
+                    <a th:href="@{/posts}"
+                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:p-0"
+                       aria-current="page">Les objets</a>
+                </li>
+            </ul>
+        </div>
 
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default" th:if="${getConnectedRole == '[ROLE_admin]'}">
+            <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-neutral-700 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-neutral-700">
 
                 <li>
-                    <a href="../"
-                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"
+                    <a th:href="@{/}"
+                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:p-0"
                        aria-current="page">Accueil</a>
                 </li>
                 <li>
                     <button id="dropdownNavbarPostLink" data-dropdown-toggle="dropdownNavbarPost"
-                            class="flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">
+                            class="flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-neutral-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-100 md:p-0 md:w-auto">
                         Posts
                         <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
@@ -46,13 +78,15 @@
                     </button>
                     <!-- Dropdown menu -->
                     <div id="dropdownNavbarPost"
-                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                        <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
+                         class="z-10 hidden font-normal bg-neutral-600 divide-y divide-gray-100 rounded-lg shadow w-44">
+                        <ul class="py-2 text-sm text-white" aria-labelledby="dropdownLargeButton">
                             <li>
-                                <a href="../posts/list" class="block px-4 py-2 hover:bg-gray-100">Liste des posts</a>
+                                <a th:href="@{/admin/posts/list}" class="block px-4 py-2 hover:bg-neutral-700">Liste des
+                                    posts</a>
                             </li>
                             <li>
-                                <a href="../posts/add" class="block px-4 py-2 hover:bg-gray-100">Ajouter des posts</a>
+                                <a th:href="@{/admin/posts/add}" class="block px-4 py-2 hover:bg-neutral-700">Ajouter
+                                    des posts</a>
                             </li>
                         </ul>
                     </div>
@@ -60,7 +94,7 @@
 
                 <li>
                     <button id="dropdownNavbarGameLink" data-dropdown-toggle="dropdownNavbarGame"
-                            class="flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">
+                            class="flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-neutral-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-100 md:p-0 md:w-auto">
                         Jeux
                         <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
@@ -71,20 +105,22 @@
                     </button>
                     <!-- Dropdown menu -->
                     <div id="dropdownNavbarGame"
-                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                        <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
+                         class="z-10 hidden font-normal bg-neutral-600 divide-y divide-gray-100 rounded-lg shadow w-44">
+                        <ul class="py-2 text-sm text-white" aria-labelledby="dropdownLargeButton">
                             <li>
-                                <a href="../games/list" class="block px-4 py-2 hover:bg-gray-100">Liste des jeux</a>
+                                <a th:href="@{/admin/games/list}" class="block px-4 py-2 hover:bg-neutral-700">Liste des
+                                    jeux</a>
                             </li>
                             <li>
-                                <a href="../games/add" class="block px-4 py-2 hover:bg-gray-100">Ajouter des jeux</a>
+                                <a th:href="@{/admin/games/add}" class="block px-4 py-2 hover:bg-neutral-700">Ajouter
+                                    des jeux</a>
                             </li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <button id="dropdownNavbarAddLink" data-dropdown-toggle="dropdownNavbarAdd"
-                            class="flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">
+                            class="flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-neutral-100 rounded hover:bg-neutral-700 md:hover:bg-transparent md:border-0 md:hover:text-neutral-100 md:p-0 md:w-auto">
                         Utilisateurs
                         <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
@@ -95,14 +131,15 @@
                     </button>
                     <!-- Dropdown menu -->
                     <div id="dropdownNavbarAdd"
-                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                        <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
+                         class="z-10 hidden font-normal bg-neutral-600 divide-y divide-gray-100 rounded-lg shadow w-44">
+                        <ul class="py-2 text-sm text-neutral-100" aria-labelledby="dropdownLargeButton">
                             <li>
-                                <a href="../users/list" class="block px-4 py-2 hover:bg-gray-100">Liste des
+                                <a th:href="@{/admin/users/list}" class="block px-4 py-2 hover:bg-neutral-700">Liste des
                                     utilisateurs</a>
                             </li>
                             <li>
-                                <a href="../users/add" class="block px-4 py-2 hover:bg-gray-100">Ajouter des
+                                <a th:href="@{/admin/users/add}" class="block px-4 py-2 hover:bg-neutral-700">Ajouter
+                                    des
                                     utilisateurs</a>
                             </li>
                         </ul>

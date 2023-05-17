@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VTI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet"/>
+    <link th:replace="template :: favicon">
+</head>
+<body>
+<nav th:replace="template :: navbar"></nav>
+<div class="w-1/4 ml-8">
+    <h2>Ajouter un utilisateur</h2>
+
+    <form action="#" th:action="@{/admin/users/save}" th:object="${user}"
+          method="POST">
+        <input type="text" th:field="*{name}" placeholder="User Name"
+               class="form-control mb-4 col-4">
+        <input type="text"
+               th:field="*{email}" placeholder="User Email"
+               class="form-control mb-4 col-4">
+        <input type="password"
+               th:field="*{password}" placeholder="Password"
+               class="form-control mb-4 col-4">
+        <select class="form-control" id="role" name="role">
+            <option value="">Select Role</option>
+            <option th:each="role : ${roles_list}"
+                    th:value="${role.id}"
+                    th:text="${role.id}+' : '+${role.label}"
+                    th:selected="${user.getRole()==role}"></option>
+        </select>
+        <button type="submit" class="btn btn-info col-2">Valider</button>
+    </form>
+
+
+    <a th:href="@{/templates/admin/users/list}">Retour</a>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+</body>
+</html>

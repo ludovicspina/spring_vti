@@ -2,8 +2,6 @@ package com.ludovic.vti.models;
 
 import javax.persistence.*;
 
-import java.util.List;
-
 @Entity
 public class Game {
     @Id
@@ -13,6 +11,16 @@ public class Game {
     private String name;
 
     private String description;
+
+    private String monnaie;
+
+    public String getMonnaie() {
+        return monnaie;
+    }
+
+    public void setMonnaie(String monnaie) {
+        this.monnaie = monnaie;
+    }
 
     public Integer getId() {
         return id;
@@ -40,5 +48,4 @@ public class Game {
         this.description = description;
         return this;
     }
-
 }
