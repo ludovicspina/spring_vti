@@ -13,7 +13,7 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String title;
     private String content;
     private Date date;
@@ -21,6 +21,9 @@ public class Post {
 
     @ManyToOne
     private Users user;
+
+    @ManyToOne
+    private Users buyer;
 
     public String getPrice() {
         return price;
@@ -41,11 +44,11 @@ public class Post {
     @ManyToOne
     private Game game;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

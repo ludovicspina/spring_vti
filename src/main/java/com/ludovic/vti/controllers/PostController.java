@@ -46,8 +46,8 @@ public class PostController {
     }
 
     @PostMapping("/admin/posts/add")
-    public String addPost(@ModelAttribute Post post, @RequestParam("user.id") Integer userId) {
-        Users user = userRepository.findById(Long.valueOf(userId)).orElse(null);
+    public String addPost(@ModelAttribute Post post, @RequestParam("user.id") Long userId) {
+        Users user = userRepository.findById(userId).orElse(null);
         post.setUser(user);
         postRepository.save(post);
         return "redirect:/admin/posts/list";
@@ -73,12 +73,38 @@ public class PostController {
     }
 
     @PostMapping("/posts/add")
-    public String addSitePost(@ModelAttribute Post post, @RequestParam("user.id") Integer userId) {
-        Users user = userRepository.findById(Long.valueOf(userId)).orElse(null);
+    public String addSitePost(@ModelAttribute Post post, @RequestParam("user.id") Long userId) {
+        Users user = userRepository.findById(userId).orElse(null);
         post.setUser(user);
         postRepository.save(post);
         return "redirect:/posts";
     }
+
+
+    @PostMapping("/admin/posts/delete")
+    public String deletePost(@RequestParam("postId") Long postId) {
+        postRepository.deleteById(postId);
+        return "redirect:/admin/posts/list";
+    }
+
+    @PostMapping("/posts/delete")
+    public String deleteMyPost(@RequestParam("postId") Long postId) {
+        postRepository.deleteById(postId);
+        return "redirect:/posts/offers";
+    }
+
+
+    @GetMapping("/posts/offers")
+    public String listOfferPosts(Model model) {
+        Iterable<Post> posts = postRepository.findAll();
+        model.addAttribute("posts", posts);
+        Iterable<Game> games = gameRepository.findAll();
+        model.addAttribute("games", games);
+        Iterable<Users> users = userRepository.findAll();
+        model.addAttribute("users", users);
+        return "/site/myPosts";
+    }
+
 
 }
 

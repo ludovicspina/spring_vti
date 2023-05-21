@@ -10,14 +10,8 @@
 <body>
 <nav th:replace="template :: navbar"></nav>
 
-<div class="flex justify-center gap-10">
-    <a th:href="@{/posts/add}"
-       class="block bg-neutral-700 rounded mt-2 px-2 py-1 text-white"
-       aria-current="page">Ajouter un objet</a>
-</div>
-
 <div class="flex justify-center">
-    <div class="bg-neutral-700 pb-2 px-2 rounded-2xl shadow-2xl m-2 border-neutral-900 border">
+    <div class="bg-neutral-700 pb-2 px-2">
         <div class="flex justify-center underline text-white py-2">Filtres</div>
         <div class="flex gap-16">
             <div class="text-white">
@@ -35,7 +29,7 @@
             </div>
             <div>
                 <label class="text-white" for="nameFilter">Filtrer par nom</label>
-                <input  class="h-6 w-32" type="text" id="nameFilter" name="nameFilter" oninput="filterByName()"/>
+                <input class="h-6 w-32" type="text" id="nameFilter" name="nameFilter" oninput="filterByName()"/>
             </div>
 
         </div>
@@ -65,12 +59,19 @@
         </thead>
         <tbody>
         <tr class="bg-white border-b" th:each="post:${posts}" th:data-game-id="${post.game.id}"
-            th:data-price="${post.price}" th:data-name="${post.title}">
-            <td class="px-6 py-4" th:text="${post.game.name}"></td>
-            <td class="px-6 py-4" th:text="${post.title}"></td>
-            <td class="px-6 py-4" th:text="${post.price} + ' ' + ${post.game.monnaie}"></td>
-            <td class="px-6 py-4" th:text="${post.user.username}"></td>
-            <td class="px-6 py-4 underline">J'achète !</td>
+            th:data-price="${post.price}" th:data-name="${post.title}" th:if="${getConnectedName} == ${post.user.username}">
+
+                <td class="px-6 py-4" th:text="${post.game.name}"></td>
+                <td class="px-6 py-4" th:text="${post.title}"></td>
+                <td class="px-6 py-4" th:text="${post.price} + ' ' + ${post.game.monnaie}"></td>
+                <td class="px-6 py-4" th:text="${post.user.username}"></td>
+            <td class="px-6 py-4 underline">
+                <form th:action="@{/posts/delete}" method="post">
+                    <input type="hidden" name="postId" th:value="${post.id}" />
+                    <button type="submit">Supprimer</button>
+                </form>
+            </td>
+
         </tr>
         </tbody>
     </table>

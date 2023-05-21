@@ -12,7 +12,7 @@
 <nav th:replace="template :: navbar"></nav>
 
 <h1>Ajouter un Post</h1>
-<form action="#" th:action="@{/posts/add}" th:object="${post}" method="post">
+<form action="#" th:action="@{/admin/posts/add}" th:object="${post}" method="post">
     <label for="game">Jeu :</label>
     <select id="game" name="game.id">
         <option th:each="game : ${games}" th:value="${game.id}" th:text="${game.name}"></option>

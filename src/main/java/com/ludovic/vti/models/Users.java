@@ -9,7 +9,7 @@ import java.util.List;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String username;
 
@@ -25,6 +25,20 @@ public class Users {
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "buyer")
+    private List<Post> buyerPosts;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Post> getBuyerPosts() {
+        return buyerPosts;
+    }
+
+    public void setBuyerPosts(List<Post> buyerPosts) {
+        this.buyerPosts = buyerPosts;
+    }
 
     public String getUsername() {
         return username;
@@ -43,11 +57,11 @@ public class Users {
     }
 
     public Integer getId() {
-        return id;
+        return Math.toIntExact(id);
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id = Long.valueOf(id);
     }
 
     public String getName() {
