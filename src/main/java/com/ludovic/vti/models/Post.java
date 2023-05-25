@@ -18,12 +18,15 @@ public class Post {
     private String content;
     private Date date;
     private String price;
+    private String offer;
+
 
     @ManyToOne
     private Users user;
 
     @ManyToOne
     private Users buyer;
+
 
     public String getPrice() {
         return price;
@@ -76,12 +79,27 @@ public class Post {
         this.date = date;
     }
 
-
     public Game getGame() {
         return game;
     }
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public String getOffer() {
+        return offer;
+    }
+
+    public void setOffer(String offer) {
+        this.offer = offer;
+    }
+
+    public Users getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Users buyer) {
+        this.buyer = buyer;
     }
 }

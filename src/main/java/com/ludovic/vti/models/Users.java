@@ -26,19 +26,12 @@ public class Users {
     private List<Post> posts;
 
     @OneToMany(mappedBy = "buyer")
-    private List<Post> buyerPosts;
+    private List<Post> buyer;
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public List<Post> getBuyerPosts() {
-        return buyerPosts;
-    }
-
-    public void setBuyerPosts(List<Post> buyerPosts) {
-        this.buyerPosts = buyerPosts;
-    }
 
     public String getUsername() {
         return username;
@@ -104,5 +97,13 @@ public class Users {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Post> getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(List<Post> buyer) {
+        this.buyer = buyer;
     }
 }

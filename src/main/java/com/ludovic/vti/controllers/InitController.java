@@ -44,6 +44,7 @@ public class InitController {
     @GetMapping("/init/users/1")
     public String initUser1(@ModelAttribute("user") Users user) {
         user.setName("admin");
+        user.setId(1L);
         user.setRole(roleRepository.findByLabel("admin"));
         user.setPassword(passwordEncoder().encode("password"));
         userRepository.save(user);
@@ -53,6 +54,7 @@ public class InitController {
     @GetMapping("/init/users/2")
     public String initUser2(@ModelAttribute("user") Users user) {
         user.setName("user");
+        user.setId(2L);
         user.setRole(roleRepository.findByLabel("user"));
         user.setPassword(passwordEncoder().encode("password"));
         userRepository.save(user);

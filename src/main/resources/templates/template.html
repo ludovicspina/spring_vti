@@ -42,28 +42,8 @@
                 </div>
             </div>
         </div>
-        <div class="hidden w-full md:block md:w-auto" id="navbar-user">
-            <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-neutral-700 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-neutral-700">
-                <li>
-                    <a th:href="@{/}"
-                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:p-0"
-                       aria-current="page">Accueil</a>
-                </li>
-                <li>
-                    <a th:href="@{/posts}"
-                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:p-0"
-                       aria-current="page">Les objets</a>
-                </li>
-                <li>
-                    <a th:href="@{/posts/offers}"
-                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:p-0"
-                       aria-current="page">Mes offres</a>
-                </li>
-            </ul>
-        </div>
-
         <div class="hidden w-full md:block md:w-auto" id="navbar-default" th:if="${getConnectedRole == '[ROLE_admin]'}">
-            <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-neutral-700 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-neutral-700">
+            <ul class="flex flex-col p-4 mt-4 border border-neutral-100 rounded-lg bg-neutral-700 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-red-900">
 
                 <li>
                     <a th:href="@{/}"
@@ -152,6 +132,28 @@
                 </li>
             </ul>
         </div>
+
+        <div class="hidden w-full md:block md:w-auto" id="navbar-user">
+            <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-neutral-700 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-neutral-700">
+                <li>
+                    <a th:href="@{/}"
+                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:p-0"
+                       aria-current="page">Accueil</a>
+                </li>
+                <li>
+                    <a th:href="@{/posts}"
+                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:p-0"
+                       aria-current="page">Les objets</a>
+                </li>
+                <li>
+                    <a th:href="@{/posts/offers}"
+                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:p-0"
+                       aria-current="page">Mes offres</a>
+                </li>
+            </ul>
+        </div>
+
+
     </div>
 </nav>
 <!-- tailwind -->

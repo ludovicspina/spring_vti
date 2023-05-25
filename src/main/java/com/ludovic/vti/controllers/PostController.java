@@ -60,6 +60,8 @@ public class PostController {
         model.addAttribute("posts", posts);
         Iterable<Game> games = gameRepository.findAll();
         model.addAttribute("games", games);
+        Iterable<Users> users = userRepository.findAll();
+        model.addAttribute("users", users);
         return "/site/posts";
     }
 
@@ -103,6 +105,18 @@ public class PostController {
         Iterable<Users> users = userRepository.findAll();
         model.addAttribute("users", users);
         return "/site/myPosts";
+    }
+
+
+    @PostMapping("/posts/makeOffer")
+    public String makePostOffer(@RequestParam("postId") Long postId, @RequestParam("userId") Long userId) {
+        Post post = postRepository.findById(postId).orElse(null);
+        Users user = userRepository.findById(userId).orElse(null);
+        if (post != null && user != null) {
+            post.setBuyer(user);
+            postRepository.save(post);
+        }
+        return "redirect:/posts";
     }
 
 
