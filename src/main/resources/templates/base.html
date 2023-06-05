@@ -10,10 +10,13 @@
 <body>
 <nav th:replace="template :: navbar"></nav>
 <div class="flex flex-col justify-center items-center mt-16">
-  <p>Appuyez sur "Initialiser" pour créer deux utilisateur (user et admin) avec deux roles (user et admin).</p>
-  <p>Ces comptes sont sécurisé par un mot de passe étant "password" et identifié par leur nom d'utilisateur.</p>
+  <p>Appuyez sur <b>"Initialiser"</b> (apparait seulement si rien n'a été déjà généré dans la bdd) pour créer deux utilisateur <b>(user et admin)</b> avec deux roles (user et admin).</p>
+  <p>Ces comptes sont sécurisé par un mot de passe étant <b>"password"</b> et identifié par leur nom d'utilisateur.</p>
   <p>Vous pouvez <a class="text-blue-500 underline" th:href="@{/admin/games/add}">créer un ou plusieurs jeux</a> en étant administrateur et ansi <a class="text-blue-500 underline" th:href="@{/posts/add}">poster des offres d'objets</a> relatifs à ces jeux.</p>
   <p>Vous pouvez ensuite prétendre à <a class="text-blue-500 underline" th:href="@{/posts}">acheter un objet dans un jeu</a>.</p>
+
+  <p class="mt-6">La base de donnée déjà configurée est reliée à mon raspberry-pi, je ferais en sorte qu'un jeu de test soit déjà présent dessus!</p>
+  <p class="mt-6">Le principe est simple : un utilisateur peut poser des offres (posts) et d'autres utilisateurs peuvent se positionner dessus pour l'acheter et donc la réserver!</p>
 </div>
 <script th:replace="template :: flowbite-2"></script>
 </body>

@@ -73,7 +73,8 @@
             <td class="px-6 py-4 underline" th:if="${post.buyer == null}">
                 <form th:action="@{/posts/makeOffer}" method="post">
                     <select name="userId" hidden>
-                        <option th:if="${user.username == getConnectedName}" th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+                        <option th:if="${user.username == getConnectedName}" th:each="user : ${users}"
+                                th:value="${user.id}" th:text="${user.username}"></option>
                     </select>
                     <input type="hidden" name="postId" th:value="${post.id}" />
                     <button type="submit" class="underline text-blue-500">Faire une offre</button>

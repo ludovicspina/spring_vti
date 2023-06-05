@@ -11,7 +11,7 @@
 
 <nav th:replace="template :: navbar"></nav>
 
-<div class="relative overflow-x-auto w-2/4 ml-8 mt-8">
+<div class="relative overflow-x-auto ml-8 mt-8">
     <table class="w-full text-sm text-left text-neutral-800">
         <thead class="text-xs text-neutral-800 uppercase bg-gray-50">
         <tr>
@@ -24,9 +24,9 @@
             <th scope="col" class="px-6 py-3">
                 Monnaie
             </th>
-            <th scope="col" class="px-6 py-3">
+<!--             <th scope="col" class="px-6 py-3">
                 Actions
-            </th>
+            </th> -->
         </tr>
         </thead>
         <tbody>
@@ -34,10 +34,10 @@
             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" th:text="${game.name}"></td>
             <td class="px-6 py-4" th:text="${game.description}"></td>
             <td class="px-6 py-4" th:text="${game.monnaie}"></td>
-            <td class="px-6 py-4 flex gap-4">
+<!--             <td class="px-6 py-4 flex gap-4">
                 <a th:href="@{/templates/admin/games/edit/{id}(id=${game.id})}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                 <a th:href="@{/templates/admin/games/edit/{id}(id=${game.id})}" class="text-indigo-600 hover:text-indigo-900">Delete</a>
-            </td>
+            </td> -->
         </tr>
         </tbody>
     </table>
